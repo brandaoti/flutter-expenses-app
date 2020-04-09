@@ -7,6 +7,7 @@ class TransactionMaterial extends StatelessWidget {
   Widget build(BuildContext context) {
     // Build Material
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: ExpensesApp(),
     );
   }
