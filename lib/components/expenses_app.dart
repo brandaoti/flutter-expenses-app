@@ -60,43 +60,45 @@ class _ExpensesAppState extends State<ExpensesApp> {
         title: Text('Despesas Pessoais'),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            child: Card(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              child: Card(
+                elevation: 5,
+                color: Colors.green,
+                child: Text('Gráfico', style: TextStyle(fontSize: 24)),
+              ),
+            ),
+            // Exibindo lista de informações
+            TransactionList(_transaction),
+            // Exibindo formulario de texto
+            Card(
               elevation: 5,
-              color: Colors.green,
-              child: Text('Gráfico', style: TextStyle(fontSize: 24)),
-            ),
-          ),
-          // Exibindo lista de informações
-          TransactionList(_transaction),
-          // Exibindo formulario de texto
-          Card(
-            elevation: 5,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 8),
-                // Titulo
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Título',
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 8),
+                  // Titulo
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Título',
+                    ),
                   ),
-                ),
 
-                SizedBox(height: 8),
-                // Valor
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Valor',
+                  SizedBox(height: 8),
+                  // Valor
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Valor',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
