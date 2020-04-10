@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import '../model/transaction.dart';
+import './transaction_list.dart';
 
 class ExpensesApp extends StatefulWidget {
   //
@@ -39,13 +40,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
             ),
           ),
           // Exibindo lista de informações
-          Column(
-            children: _transaction.map((tr) {
-              return Card(
-                child: Text(tr.title),
-              );
-            }).toList(),
-          ),
+          TransactionList(_transaction)
         ],
       ),
     );
