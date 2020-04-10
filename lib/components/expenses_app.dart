@@ -72,8 +72,6 @@ class _ExpensesAppState extends State<ExpensesApp> {
                 child: Text('Gráfico', style: TextStyle(fontSize: 24)),
               ),
             ),
-            // Exibindo lista de informações
-            TransactionList(_transaction),
             // Exibindo formulario de texto
             Card(
               elevation: 5,
@@ -94,9 +92,22 @@ class _ExpensesAppState extends State<ExpensesApp> {
                       labelText: 'Valor',
                     ),
                   ),
+                  // Implementando Botão
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      FlatButton(
+                        child: Text('Nova Transação?'),
+                        textColor: Colors.green,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
+            // Exibindo lista de informações
+            TransactionList(_transaction),
           ],
         ),
       ),
