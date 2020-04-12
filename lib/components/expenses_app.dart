@@ -20,8 +20,21 @@ class _ExpensesAppState extends State<ExpensesApp> {
       value: 33.33,
       date: DateTime.now(),
     ),
-    // add novas informações pra testar a lista;
   ];
+
+  // chamar no Transactonform
+  _addTransaction(String title, double value) {
+    final newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _transaction.add(newTransaction);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +57,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
               ),
             ),
             // Exibindo formulario de texto
-            TransactionForm(),
+            TransactionForm(_addTransaction),
             // Exibindo lista de informações
             TransactionList(_transaction),
           ],
