@@ -10,6 +10,19 @@ class TransactionForm extends StatelessWidget {
 
   TransactionForm(this.onSubmit);
 
+  _submitForm() {
+    final title = titleController.text;
+    final value = double.tryParse(valueController.text) ?? 0.0;
+
+    if (title.isEmpty || value <= 0) {
+      return AlertDialog(
+        title: Text('Campo vazio'),
+      );
+    }
+
+    onSubmit(title, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     // implement build TextFormField
@@ -21,6 +34,7 @@ class TransactionForm extends StatelessWidget {
           // Titulo
           TextFormField(
             controller: titleController,
+            onFieldSubmitted: (_) => _submitForm(),
             decoration: InputDecoration(
               labelText: 'Título',
             ),
@@ -31,6 +45,7 @@ class TransactionForm extends StatelessWidget {
           TextFormField(
             keyboardType: TextInputType.number,
             controller: valueController,
+            onFieldSubmitted: (_) => _submitForm(),
             decoration: InputDecoration(
               labelText: 'Valor',
             ),
@@ -42,12 +57,7 @@ class TransactionForm extends StatelessWidget {
               FlatButton(
                 child: Text('Nova Transação?'),
                 textColor: Colors.green,
-                onPressed: () {
-                  final title = titleController.text;
-                  final value = double.tryParse(valueController.text);
-
-                  onSubmit(title, value);
-                },
+                onPressed: _submitForm,
               ),
             ],
           ),
