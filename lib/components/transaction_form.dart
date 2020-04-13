@@ -36,6 +36,9 @@ class TransactionForm extends StatelessWidget {
             controller: titleController,
             onFieldSubmitted: (_) => _submitForm(),
             decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
               labelText: 'Título',
             ),
           ),
@@ -47,6 +50,9 @@ class TransactionForm extends StatelessWidget {
             controller: valueController,
             onFieldSubmitted: (_) => _submitForm(),
             decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
               labelText: 'Valor',
             ),
           ),
