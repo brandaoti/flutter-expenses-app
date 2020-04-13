@@ -14,46 +14,63 @@ class TransactionList extends StatelessWidget {
     // Build - lista de Transações
     return Container(
       height: 300,
-      child: ListView.builder(
-        itemCount: transaction.length,
-        itemBuilder: (context, index) {
-          final tr = transaction[index];
-
-          return Card(
-            elevation: 5,
-            margin: EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 10,
-            ),
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: FittedBox(
-                    child: Text(
-                      "R\$ ${tr.value.toStringAsFixed(2)}",
-                    ),
+      child: transaction.isEmpty
+          ? Column(
+              children: <Widget>[
+                Text(
+                  'Nenhuma Transação Cadastrada!',
+                  style: Theme.of(context).textTheme.title,
+                ),
+                SizedBox(height: 50),
+                Container(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    color: Colors.purple,
                   ),
                 ),
-              ),
-              title: Text(
-                tr.title,
-                style: Theme.of(context).textTheme.title,
-              ),
-              subtitle: Text(
-                DateFormat('d MMM y').format(tr.date),
-                style: TextStyle(fontSize: 12),
-              ),
-              trailing: IconButton(
-                icon: Icon(Icons.delete_outline),
-                color: Colors.red,
-                onPressed: () {},
-              ),
+              ],
+            )
+          : ListView.builder(
+              itemCount: transaction.length,
+              itemBuilder: (context, index) {
+                final tr = transaction[index];
+
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 10,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: FittedBox(
+                          child: Text(
+                            "R\$ ${tr.value.toStringAsFixed(2)}",
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      tr.title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(tr.date),
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete_outline),
+                      color: Colors.red,
+                      onPressed: () {},
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
