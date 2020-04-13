@@ -3,6 +3,7 @@ import 'dart:math';
 
 import '../model/transaction.dart';
 import './transaction_list.dart';
+import './transaction_form.dart';
 
 class ExpensesApp extends StatefulWidget {
   //
@@ -11,46 +12,22 @@ class ExpensesApp extends StatefulWidget {
 }
 
 class _ExpensesAppState extends State<ExpensesApp> {
-  final _transaction = [
-    Transaction(
+  // List
+  final List<Transaction> _transaction = [];
+
+  // chamar no Transactonform
+  _addTransaction(String title, double value) {
+    final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
-      title: 'Conta de água',
-      value: 33.33,
+      title: title,
+      value: value,
       date: DateTime.now(),
-    ),
-    // add novas informações pra testar a lista;
-    // TODO: Será removido em breve.
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de água',
-      value: 33.33,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 81.33,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de gas',
-      value: 79.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de internet',
-      value: 64.90,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de celular',
-      value: 19.99,
-      date: DateTime.now(),
-    ),
-  ];
+    );
+
+    setState(() {
+      _transaction.add(newTransaction);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,39 +50,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
               ),
             ),
             // Exibindo formulario de texto
-            Card(
-              elevation: 5,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 8),
-                  // Titulo
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Título',
-                    ),
-                  ),
-
-                  SizedBox(height: 8),
-                  // Valor
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Valor',
-                    ),
-                  ),
-                  // Implementando Botão
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      FlatButton(
-                        child: Text('Nova Transação?'),
-                        textColor: Colors.green,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            TransactionForm(_addTransaction),
             // Exibindo lista de informações
             TransactionList(_transaction),
           ],

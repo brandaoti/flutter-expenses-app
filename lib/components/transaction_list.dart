@@ -12,53 +12,66 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Build - lista de Transações
-    return Column(
-      children: transaction.map((tr) {
-        return Card(
-          elevation: 5,
-          child: Row(
-            //crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.symmetric(
-                  vertical: 15,
-                  horizontal: 10,
+    return Container(
+      height: 300,
+      child: transaction.isEmpty
+          ? Column(
+              children: <Widget>[
+                SizedBox(height: 30),
+                Text(
+                  'Nenhuma Transação Cadastrada!',
+                  style: Theme.of(context).textTheme.title,
                 ),
-                decoration: BoxDecoration(
-                  border: Border.all(
+                SizedBox(height: 30),
+                Container(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
                     color: Colors.purple,
-                    width: 2,
                   ),
                 ),
-                // Implementação valor, titulo e data na lista
-                // Add Value
-                child: Text(
-                  'R\$ ${tr.value.toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              // Add Title
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    tr.title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+              ],
+            )
+          : ListView.builder(
+              itemCount: transaction.length,
+              itemBuilder: (context, index) {
+                final tr = transaction[index];
+
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 10,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: FittedBox(
+                          child: Text(
+                            "R\$ ${tr.value.toStringAsFixed(2)}",
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      tr.title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(tr.date),
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete_outline),
+                      color: Colors.red,
+                      onPressed: () {},
                     ),
                   ),
-                  //Formatação da data
-                  Text(
-                    DateFormat('d MMM y').format(tr.date),
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+                );
+              },
+            ),
     );
   }
 }
