@@ -34,8 +34,16 @@ class _ExpensesAppState extends State<ExpensesApp> {
     // Implements Scaffold
     return Scaffold(
       appBar: AppBar(
-        title: Text('Despesas Pessoais'),
         centerTitle: true,
+        title: Text('Despesas Pessoais'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            tooltip: 'Adicionar Transações!',
+            iconSize: 30,
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
