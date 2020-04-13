@@ -13,14 +13,7 @@ class ExpensesApp extends StatefulWidget {
 
 class _ExpensesAppState extends State<ExpensesApp> {
   // List
-  final _transaction = [
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de água',
-      value: 33.33,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transaction = [];
 
   // chamar no Transactonform
   _addTransaction(String title, double value) {
