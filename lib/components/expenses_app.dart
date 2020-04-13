@@ -50,13 +50,6 @@ class _ExpensesAppState extends State<ExpensesApp> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              child: Card(
-                elevation: 5,
-                color: Colors.green,
-                child: Text('Gráfico', style: TextStyle(fontSize: 24)),
-              ),
-            ),
             // Exibindo formulario de texto
             TransactionForm(_addTransaction),
             // Exibindo lista de informações
