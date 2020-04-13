@@ -21,46 +21,30 @@ class TransactionList extends StatelessWidget {
 
           return Card(
             elevation: 5,
-            child: Row(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.purple,
-                      width: 2,
+            margin: EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 10,
+            ),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: FittedBox(
+                    child: Text(
+                      "R\$ ${tr.value.toStringAsFixed(2)}",
                     ),
-                  ),
-                  // Implementação valor, titulo e data na lista
-                  // Add Value
-                  child: Text(
-                    'R\$ ${tr.value.toStringAsFixed(2)}',
-                    style: TextStyle(fontSize: 20),
                   ),
                 ),
-                // Add Title
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      tr.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    //Formatação da data
-                    Text(
-                      DateFormat('d MMM y').format(tr.date),
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ],
+              ),
+              title: Text(
+                tr.title,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                DateFormat('d MMM y').format(tr.date),
+                style: TextStyle(fontSize: 12),
+              ),
             ),
           );
         },
