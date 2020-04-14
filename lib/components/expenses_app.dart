@@ -28,6 +28,9 @@ class _ExpensesAppState extends State<ExpensesApp> {
     setState(() {
       _transaction.add(newTransaction);
     });
+
+    // Fechar o _showModalForm
+    Navigator.of(context).pop();
   }
 
   _showModalForm(BuildContext context) {
