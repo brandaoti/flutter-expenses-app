@@ -4,6 +4,7 @@ import 'dart:math';
 import '../model/transaction.dart';
 import './transaction_list.dart';
 import './transaction_form.dart';
+import './transaction_chart.dart';
 
 class ExpensesApp extends StatefulWidget {
   //
@@ -50,8 +51,8 @@ class _ExpensesAppState extends State<ExpensesApp> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            // Exibindo formulario de texto
-            TransactionForm(_addTransaction),
+            //Exibindo Gráficos
+
             // Exibindo lista de informações
             TransactionList(_transaction),
           ],
