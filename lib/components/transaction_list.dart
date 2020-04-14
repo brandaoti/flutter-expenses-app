@@ -63,6 +63,7 @@ class TransactionList extends StatelessWidget {
                       DateFormat('d MMM y').format(tr.date),
                       style: TextStyle(fontSize: 12),
                     ),
+                    // TODO: fazer uma função para excluir
                     trailing: IconButton(
                       icon: Icon(Icons.delete_outline),
                       color: Colors.red,
