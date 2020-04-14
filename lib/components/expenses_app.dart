@@ -30,6 +30,15 @@ class _ExpensesAppState extends State<ExpensesApp> {
     });
   }
 
+  _showModalForm(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return TransactionForm(_addTransaction);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Implements Scaffold
@@ -42,7 +51,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
             icon: Icon(Icons.add),
             tooltip: 'Adicionar Transações!',
             iconSize: 30,
-            onPressed: () {},
+            onPressed: () => _showModalForm(context),
           ),
         ],
       ),
