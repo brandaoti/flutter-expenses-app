@@ -42,6 +42,15 @@ class _ExpensesAppState extends State<ExpensesApp> {
     );
   }
 
+  //Via pegar a lista recentes, antes e depois
+  List<Transaction> get _recentTransaction {
+    return _transaction.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Implements Scaffold
@@ -64,7 +73,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             //Exibindo Gráficos
-
+            TransactionChart(_recentTransaction),
             // Exibindo lista de informações
             TransactionList(_transaction),
           ],
