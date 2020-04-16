@@ -1,7 +1,9 @@
+import 'package:expenses_app/components/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../model/transaction.dart';
+import './chart_bar.dart';
 
 class TransactionChart extends StatelessWidget {
   // Lista de transações recentes
@@ -40,19 +42,35 @@ class TransactionChart extends StatelessWidget {
     });
   }
 
+  // vai retornar um Future, pegando o valor do elemento anterior
+  double get _weekTotalvalue {
+    return groupTransaction.fold(0.0, (value, element) {
+      return value + element['value'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // implements build Transaction chart
     //groupTransaction;
     return Card(
-      elevation: 8,
+      elevation: 15,
       margin: EdgeInsets.symmetric(
         vertical: 15,
         horizontal: 10,
       ),
       child: Row(
         children: groupTransaction.map((tr) {
-          return Text('${tr['day']} : ${tr['value']}');
+          return Flexible(
+            fit: FlexFit.tight,
+            child: ChartBar(
+              label: tr['day'],
+              value: tr['value'],
+              percentage: _weekTotalvalue == 0
+                  ? 0
+                  : (tr['value'] as double) / _weekTotalvalue,
+            ),
+          );
         }).toList(),
       ),
       color: Colors.purple[50],
