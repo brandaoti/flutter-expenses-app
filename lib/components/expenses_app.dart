@@ -51,7 +51,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
     }).toList();
   }
 
-  // Remover Transações
+  // É tratado pelo Id da transação e remove o item.
   _removeTransaction(String id) {
     setState(() {
       return _transaction.removeWhere((tr) {
