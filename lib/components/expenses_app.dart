@@ -42,13 +42,22 @@ class _ExpensesAppState extends State<ExpensesApp> {
     );
   }
 
-  //Via pegar a lista recentes, antes e depois
+  // Vai pegar a lista recentes, antes e depois
   List<Transaction> get _recentTransaction {
     return _transaction.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(
         Duration(days: 7),
       ));
     }).toList();
+  }
+
+  // Remover Transações
+  _removeTransaction(String id) {
+    setState(() {
+      return _transaction.removeWhere((tr) {
+        return tr.id == id;
+      });
+    });
   }
 
   @override
@@ -75,7 +84,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
             //Exibindo Gráficos
             TransactionChart(_recentTransaction),
             // Exibindo lista de informações
-            TransactionList(_transaction),
+            TransactionList(_transaction, _removeTransaction),
           ],
         ),
       ),

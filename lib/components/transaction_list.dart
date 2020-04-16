@@ -5,9 +5,13 @@ import 'package:intl/intl.dart';
 import '../model/transaction.dart';
 
 class TransactionList extends StatelessWidget {
+  //Lista herdada do pai
   final List<Transaction> transaction;
 
-  TransactionList(this.transaction);
+  //Função herdada do pai para fazer exclusão
+  final void Function(String) onRemove;
+
+  TransactionList(this.transaction, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +67,11 @@ class TransactionList extends StatelessWidget {
                       DateFormat('d MMM y').format(tr.date),
                       style: TextStyle(fontSize: 12),
                     ),
-                    // TODO: fazer uma função para excluir
+                    // Responsavel por excluir as transações, get ID
                     trailing: IconButton(
                       icon: Icon(Icons.delete_outline),
                       color: Colors.red,
-                      onPressed: () {},
+                      onPressed: () => onRemove(tr.id),
                     ),
                   ),
                 );
