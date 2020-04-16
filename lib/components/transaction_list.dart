@@ -13,16 +13,16 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     // Build - lista de Transações
     return Container(
-      height: 300,
+      height: 400,
       child: transaction.isEmpty
           ? Column(
               children: <Widget>[
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 Text(
                   'Nenhuma Transação Cadastrada!',
                   style: Theme.of(context).textTheme.title,
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 Container(
                   height: 200,
                   child: Image.asset(
