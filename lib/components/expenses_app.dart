@@ -4,6 +4,7 @@ import 'dart:math';
 import '../model/transaction.dart';
 import './transaction_list.dart';
 import './transaction_form.dart';
+import './transaction_chart.dart';
 
 class ExpensesApp extends StatefulWidget {
   //
@@ -27,6 +28,36 @@ class _ExpensesAppState extends State<ExpensesApp> {
     setState(() {
       _transaction.add(newTransaction);
     });
+
+    // Fechar o _showModalForm
+    Navigator.of(context).pop();
+  }
+
+  _showModalForm(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return TransactionForm(_addTransaction);
+      },
+    );
+  }
+
+  // Vai pegar a lista recentes, antes e depois
+  List<Transaction> get _recentTransaction {
+    return _transaction.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
+
+  // É tratado pelo Id da transação e remove o item.
+  _removeTransaction(String id) {
+    setState(() {
+      return _transaction.removeWhere((tr) {
+        return tr.id == id;
+      });
+    });
   }
 
   @override
@@ -34,25 +65,26 @@ class _ExpensesAppState extends State<ExpensesApp> {
     // Implements Scaffold
     return Scaffold(
       appBar: AppBar(
-        title: Text('Despesas Pessoais'),
         centerTitle: true,
+        title: Text('Despesas Pessoais'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            tooltip: 'Adicionar Transações!',
+            iconSize: 30,
+            onPressed: () => _showModalForm(context),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              child: Card(
-                elevation: 5,
-                color: Colors.green,
-                child: Text('Gráfico', style: TextStyle(fontSize: 24)),
-              ),
-            ),
-            // Exibindo formulario de texto
-            TransactionForm(_addTransaction),
+            //Exibindo Gráficos
+            TransactionChart(_recentTransaction),
             // Exibindo lista de informações
-            TransactionList(_transaction),
+            TransactionList(_transaction, _removeTransaction),
           ],
         ),
       ),

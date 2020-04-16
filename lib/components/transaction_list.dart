@@ -5,24 +5,28 @@ import 'package:intl/intl.dart';
 import '../model/transaction.dart';
 
 class TransactionList extends StatelessWidget {
+  //Lista herdada do pai
   final List<Transaction> transaction;
 
-  TransactionList(this.transaction);
+  //Função herdada do pai para fazer exclusão
+  final void Function(String) onRemove;
+
+  TransactionList(this.transaction, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
     // Build - lista de Transações
     return Container(
-      height: 300,
+      height: 400,
       child: transaction.isEmpty
           ? Column(
               children: <Widget>[
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 Text(
                   'Nenhuma Transação Cadastrada!',
                   style: Theme.of(context).textTheme.title,
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 Container(
                   height: 200,
                   child: Image.asset(
@@ -63,10 +67,11 @@ class TransactionList extends StatelessWidget {
                       DateFormat('d MMM y').format(tr.date),
                       style: TextStyle(fontSize: 12),
                     ),
+                    // Responsavel por excluir as transações, get ID
                     trailing: IconButton(
                       icon: Icon(Icons.delete_outline),
                       color: Colors.red,
-                      onPressed: () {},
+                      onPressed: () => onRemove(tr.id),
                     ),
                   ),
                 );
