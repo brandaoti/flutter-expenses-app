@@ -15,7 +15,7 @@ class TransactionMaterial extends StatelessWidget {
               title: TextStyle(
                 fontFamily: 'Kreon',
                 fontSize: 18,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
               ),
             ),
         appBarTheme: AppBarTheme(
@@ -23,7 +23,7 @@ class TransactionMaterial extends StatelessWidget {
                 title: TextStyle(
                   fontFamily: 'Kreon',
                   fontSize: 24,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
         ),
