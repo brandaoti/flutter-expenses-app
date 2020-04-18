@@ -10,7 +10,7 @@ class TransactionMaterial extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        fontFamily: 'CormorantGaramond',
+        fontFamily: 'Kreon',
         textTheme: ThemeData.light().textTheme.copyWith(
               title: TextStyle(
                 fontFamily: 'Kreon',
