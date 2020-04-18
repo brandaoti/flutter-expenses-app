@@ -10,11 +10,16 @@ class TransactionMaterial extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        fontFamily: 'Kreon',
+        fontFamily: 'CormorantGaramond',
         textTheme: ThemeData.light().textTheme.copyWith(
               title: TextStyle(
                 fontFamily: 'Kreon',
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              subtitle: TextStyle(
+                fontFamily: 'CormorantGaramond',
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
