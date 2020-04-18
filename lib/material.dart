@@ -17,6 +17,11 @@ class TransactionMaterial extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
+              subtitle: TextStyle(
+                fontFamily: 'CormorantGaramond',
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
