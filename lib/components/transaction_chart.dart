@@ -31,9 +31,6 @@ class TransactionChart extends StatelessWidget {
         }
       }
 
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
-
       // Map retornado para o metodo groupTransaction
       return {
         'day': DateFormat.E().format(weekDay)[0],
@@ -52,7 +49,6 @@ class TransactionChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // implements build Transaction chart
-    //groupTransaction;
     return Card(
       elevation: 15,
       margin: EdgeInsets.symmetric(
