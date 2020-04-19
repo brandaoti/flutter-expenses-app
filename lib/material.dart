@@ -19,7 +19,7 @@ class TransactionMaterial extends StatelessWidget {
               ),
               subtitle: TextStyle(
                 fontFamily: 'CormorantGaramond',
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
