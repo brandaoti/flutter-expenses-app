@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TransactionForm extends StatefulWidget {
   // Controladores
-  final void Function(String, double) onSubmit;
+  final void Function(String, double, DateTime) onSubmit;
 
   TransactionForm(this.onSubmit);
 
@@ -11,9 +11,11 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
+  // Controladores
   final titleController = TextEditingController();
-
   final valueController = TextEditingController();
+
+  DateTime _showDate = DateTime.now();
 
   // Função enviar formulario
   _submitForm() {
@@ -26,20 +28,20 @@ class _TransactionFormState extends State<TransactionForm> {
     }
 
     //Função pra add o titulo, valor e data
-    widget.onSubmit(title, value);
+    widget.onSubmit(title, value, _showDate);
   }
 
   // Função ativar a data
   _showDatePicker() {
     showDatePicker(
-      context: null,
-      initialDate: null,
-      firstDate: null,
-      lastDate: null,
-    );
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((datePicker) {
+      _showDate = datePicker;
+    });
   }
-
-  List<bool> iSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +104,7 @@ class _TransactionFormState extends State<TransactionForm> {
                       color: Colors.red,
                       iconSize: 50,
                       tooltip: 'Adicionar nova data?',
-                      onPressed: () {},
+                      onPressed: _showDatePicker,
                     ),
 
                     // Add transações
