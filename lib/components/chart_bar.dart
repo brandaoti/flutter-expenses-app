@@ -20,15 +20,15 @@ class ChartBar extends StatelessWidget {
         return Column(
           children: <Widget>[
             Container(
-              height: 20,
+              height: constraints.maxHeight * 0.15,
               child: FittedBox(
                 child: Text('${value.toStringAsFixed(2)}'),
               ),
             ),
             //
-            SizedBox(height: 5),
+            SizedBox(height: constraints.maxHeight * 0.05),
             Container(
-              height: 60,
+              height: constraints.maxHeight * 0.6,
               width: 10,
               child: Stack(
                 alignment: Alignment.bottomCenter,
@@ -51,9 +51,12 @@ class ChartBar extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: constraints.maxHeight * 0.05),
             // vai exibir as letras com o dia da semana
-            Text(label),
+            Container(
+              height: constraints.maxHeight * 0.15,
+              child: Text(label),
+            ),
           ],
         );
       },
