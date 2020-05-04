@@ -100,7 +100,9 @@ class _TransactionFormState extends State<TransactionForm> {
                   ),
                   // TODO: verificar como melhorar esse TestStyle
                   Text(
-                    '${DateFormat(' dd MMM y').format(_showDate)}',
+                    _showDate == null
+                        ? 'Nenhuma data selecionada!'
+                        : '${DateFormat(' dd MMM y').format(_showDate)}',
                     style: TextStyle(
                       color: Colors.red,
                       fontFamily: 'Kreon',
