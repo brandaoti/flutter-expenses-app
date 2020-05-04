@@ -13,8 +13,65 @@ class ExpensesApp extends StatefulWidget {
 }
 
 class _ExpensesAppState extends State<ExpensesApp> {
-  // List
-  final List<Transaction> _transaction = [];
+  // List TODO: Remover
+  final List<Transaction> _transaction = [
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+  ];
+
+  bool _showChart = false;
 
   // chamar no Transactonform
   _addTransaction(String title, double value, DateTime date) {
@@ -62,6 +119,8 @@ class _ExpensesAppState extends State<ExpensesApp> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     // Implements Scaffold
     return Scaffold(
       appBar: AppBar(
@@ -82,9 +141,15 @@ class _ExpensesAppState extends State<ExpensesApp> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             //Exibindo Gráficos
-            TransactionChart(_recentTransaction),
+            Container(
+              height: mediaQuery.size.height * 0.25,
+              child: TransactionChart(_recentTransaction),
+            ),
             // Exibindo lista de informações
-            TransactionList(_transaction, _removeTransaction),
+            Container(
+              height: mediaQuery.size.height * 0.75,
+              child: TransactionList(_transaction, _removeTransaction),
+            ),
           ],
         ),
       ),
