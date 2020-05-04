@@ -71,7 +71,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
     ),
   ];
 
-  bool _showChart = false;
+  bool _showChart = true;
 
   // chamar no Transactonform
   _addTransaction(String title, double value, DateTime date) {
@@ -163,6 +163,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
               height: avaliableHeight * 0.25,
               child: TransactionChart(_recentTransaction),
             ),
+
           // Exibindo lista de informações
           Container(
             height: avaliableHeight * (_showChart ? 0.75 : 1),
