@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
 import 'dart:math';
+import 'dart:io';
 
 import '../model/transaction.dart';
 import './transaction_list.dart';
@@ -117,6 +120,20 @@ class _ExpensesAppState extends State<ExpensesApp> {
     });
   }
 
+  // Intermediação os actions
+  Widget _getIconButton(IconData icon, Function fn) {
+    return Platform.isIOS
+        ? GestureDetector(
+            child: Icon(icon),
+            onTap: fn,
+          )
+        : IconButton(
+            icon: Icon(icon),
+            tooltip: 'Exibir Formulário',
+            onPressed: fn,
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -124,6 +141,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
     // Responsavel por ocultar/exibir grafico
     final showSwitch = Switch(
       value: _showChart,
+      activeColor: Colors.green,
       onChanged: (newValue) {
         setState(() {
           _showChart = newValue;
@@ -131,20 +149,28 @@ class _ExpensesAppState extends State<ExpensesApp> {
       },
     );
 
+    // Passa a função pra verificar as ações do IconButton
+    final actions = <Widget>[
+      _getIconButton(
+        Platform.isIOS ? Icons.add : Icons.add,
+        () => _showModalForm(context),
+      )
+    ];
+
     // Armazena a construção do appBar
-    final appBar = AppBar(
-      centerTitle: true,
-      leading: showSwitch,
-      title: Text('Despesas Pessoais'),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.add),
-          tooltip: 'Adicionar Transações!',
-          iconSize: 30,
-          onPressed: () => _showModalForm(context),
-        ),
-      ],
-    );
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text('Despesas Pessoas'),
+            trailing: Row(
+              children: actions,
+            ),
+          )
+        : AppBar(
+            leading: showSwitch,
+            title: Text('Despesas Pessoais'),
+            centerTitle: true,
+            actions: actions,
+          );
 
     // Responsavel pela altura do app
     final avaliableHeight =
@@ -152,7 +178,7 @@ class _ExpensesAppState extends State<ExpensesApp> {
             mediaQuery.padding.top;
 
     // Armazena a construção do body
-    final pageBody = SingleChildScrollView(
+    final bodyPage = SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -173,10 +199,15 @@ class _ExpensesAppState extends State<ExpensesApp> {
       ),
     );
 
-    // Implements Scaffold
-    return Scaffold(
-      appBar: appBar,
-      body: pageBody,
-    );
+    // Implements Scaffold for Android and IOS
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            navigationBar: appBar,
+            child: bodyPage,
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: bodyPage,
+          );
   }
 }
