@@ -13,8 +13,65 @@ class ExpensesApp extends StatefulWidget {
 }
 
 class _ExpensesAppState extends State<ExpensesApp> {
-  // List
-  final List<Transaction> _transaction = [];
+  // List TODO: Remover
+  final List<Transaction> _transaction = [
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: Random().nextDouble().toString(),
+      title: 'Conta de luz',
+      value: 68.91,
+      date: DateTime.now(),
+    ),
+  ];
+
+  bool _showChart = true;
 
   // chamar no Transactonform
   _addTransaction(String title, double value, DateTime date) {
@@ -62,32 +119,64 @@ class _ExpensesAppState extends State<ExpensesApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Implements Scaffold
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Despesas Pessoais'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            tooltip: 'Adicionar Transações!',
-            iconSize: 30,
-            onPressed: () => _showModalForm(context),
+    final mediaQuery = MediaQuery.of(context);
+
+    // Responsavel por ocultar/exibir grafico
+    final showSwitch = Switch(
+      value: _showChart,
+      onChanged: (newValue) {
+        setState(() {
+          _showChart = newValue;
+        });
+      },
+    );
+
+    // Armazena a construção do appBar
+    final appBar = AppBar(
+      centerTitle: true,
+      leading: showSwitch,
+      title: Text('Despesas Pessoais'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          tooltip: 'Adicionar Transações!',
+          iconSize: 30,
+          onPressed: () => _showModalForm(context),
+        ),
+      ],
+    );
+
+    // Responsavel pela altura do app
+    final avaliableHeight =
+        (mediaQuery.size.height - appBar.preferredSize.height) -
+            mediaQuery.padding.top;
+
+    // Armazena a construção do body
+    final pageBody = SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          //Exibindo Gráficos
+          if (_showChart)
+            Container(
+              height: avaliableHeight * 0.25,
+              child: TransactionChart(_recentTransaction),
+            ),
+
+          // Exibindo lista de informações
+          Container(
+            height: avaliableHeight * (_showChart ? 0.75 : 1),
+            child: TransactionList(_transaction, _removeTransaction),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            //Exibindo Gráficos
-            TransactionChart(_recentTransaction),
-            // Exibindo lista de informações
-            TransactionList(_transaction, _removeTransaction),
-          ],
-        ),
-      ),
+    );
+
+    // Implements Scaffold
+    return Scaffold(
+      appBar: appBar,
+      body: pageBody,
     );
   }
 }
