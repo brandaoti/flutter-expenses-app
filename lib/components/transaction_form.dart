@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'adaptative_button.dart';
+
 class TransactionForm extends StatefulWidget {
   // Controladores
   final void Function(String, double, DateTime) onSubmit;
@@ -109,30 +111,11 @@ class _TransactionFormState extends State<TransactionForm> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // Linha pra organizar os botões.
-                  Row(
-                    children: <Widget>[
-                      //Selecionar data
-                      IconButton(
-                        icon: Icon(
-                          Icons.date_range,
-                        ),
-                        color: Colors.red,
-                        iconSize: 50,
-                        tooltip: 'Adicionar nova data?',
-                        onPressed: _showDatePicker,
-                      ),
 
-                      // Add transações
-                      IconButton(
-                        icon: Icon(Icons.add_circle_outline),
-                        color: Theme.of(context).primaryColor,
-                        iconSize: 50,
-                        tooltip: 'Adicionar nova transação?',
-                        onPressed: _submitForm,
-                      ),
-                    ],
-                  )
+                  // Instanciando AdaptativeButton
+                  AdaptativeButton(
+                    onPressed: _submitForm,
+                  ),
                 ],
               ),
             ),
