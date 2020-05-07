@@ -43,21 +43,19 @@ class AdaptativeDatePicker extends StatelessWidget {
             maximumDate: DateTime.now(),
             onDateTimeChanged: null,
           )
-        : Container(
-            child: Row(
-              children: <Widget>[
-                Text(
-                  showDate == null
-                      ? 'Nenhuma data selecionada!'
-                      : '${DateFormat('d MMM y').format(showDate)}',
-                  style: Theme.of(context).textTheme.title,
-                ),
-                IconButton(
-                  icon: Icon(Icons.date_range),
-                  onPressed: () => onDateChanged,
-                ),
-              ],
-            ),
+        : Row(
+            children: <Widget>[
+              Text(
+                showDate == null
+                    ? 'Nenhuma data selecionada!'
+                    : '${DateFormat('d MMM y').format(showDate)}',
+                style: Theme.of(context).textTheme.title,
+              ),
+              IconButton(
+                icon: Icon(Icons.date_range),
+                onPressed: () => onDateChanged,
+              ),
+            ],
           );
   }
 }
