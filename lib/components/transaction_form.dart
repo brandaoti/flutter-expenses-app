@@ -98,7 +98,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 children: <Widget>[
                   Text(
                     'Data:',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                   // TODO: verificar como melhorar esse TestStyle
                   Text(

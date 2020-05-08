@@ -12,12 +12,12 @@ class TransactionMaterial extends StatelessWidget {
         primarySwatch: Colors.purple,
         fontFamily: 'Kreon',
         textTheme: ThemeData.light().textTheme.copyWith(
-              title: TextStyle(
+              headline6: TextStyle(
                 fontFamily: 'Kreon',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
-              subtitle: TextStyle(
+              subtitle2: TextStyle(
                 fontFamily: 'CormorantGaramond',
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -25,7 +25,7 @@ class TransactionMaterial extends StatelessWidget {
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
+                headline6: TextStyle(
                   fontFamily: 'Kreon',
                   fontSize: 24,
                   fontWeight: FontWeight.w300,
