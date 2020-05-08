@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'adaptative_button.dart';
+import 'adaptative_date_picker.dart';
 
 class TransactionForm extends StatefulWidget {
   // Controladores
@@ -100,18 +101,16 @@ class _TransactionFormState extends State<TransactionForm> {
                     'Data:',
                     style: Theme.of(context).textTheme.headline6,
                   ),
-                  // TODO: verificar como melhorar esse TestStyle
-                  Text(
-                    _showDate == null
-                        ? 'Nenhuma data selecionada!'
-                        : '${DateFormat(' dd MMM y').format(_showDate)}',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontFamily: 'Kreon',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
 
+                  // Instanciar AdaptativeDatePicker
+                  AdaptativeDatePicker(
+                    showDate: _showDate,
+                    onDateChanged: (newDate) {
+                      setState(() {
+                        _showDate = newDate;
+                      });
+                    },
+                  ),
                   // Instanciando AdaptativeButton
                   AdaptativeButton(
                     onPressed: _submitForm,

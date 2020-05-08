@@ -49,11 +49,11 @@ class AdaptativeDatePicker extends StatelessWidget {
                 showDate == null
                     ? 'Nenhuma data selecionada!'
                     : '${DateFormat('d MMM y').format(showDate)}',
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
               IconButton(
                 icon: Icon(Icons.date_range),
-                onPressed: () => onDateChanged,
+                onPressed: () => _showDatePicker(context),
               ),
             ],
           );
