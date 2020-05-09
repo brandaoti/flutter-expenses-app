@@ -57,10 +57,10 @@ class AdaptativeDatePicker extends StatelessWidget {
                       ? 'Nenhuma data selecionada!'
                       : '${DateFormat('yMMMMEEEEd').format(showDate)}',
                   style: TextStyle(
-                    fontFamily: 'Kreon',
+                    //fontFamily: 'CormorantGaramond',
                     color: color,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 IconButton(
