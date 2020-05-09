@@ -34,28 +34,43 @@ class AdaptativeDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Color
+    final Color color = Colors.deepOrange;
+
     // implement build DatePicker for IOS And ANDROID
     return Platform.isIOS
-        ? CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date,
-            initialDateTime: DateTime.now(),
-            minimumDate: DateTime(2019),
-            maximumDate: DateTime.now(),
-            onDateTimeChanged: null,
+        ? Container(
+            height: 200,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              initialDateTime: DateTime.now(),
+              minimumDate: DateTime(2019),
+              maximumDate: DateTime.now(),
+              onDateTimeChanged: onDateChanged,
+            ),
           )
-        : Row(
-            children: <Widget>[
-              Text(
-                showDate == null
-                    ? 'Nenhuma data selecionada!'
-                    : '${DateFormat('d MMM y').format(showDate)}',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              IconButton(
-                icon: Icon(Icons.date_range),
-                onPressed: () => _showDatePicker(context),
-              ),
-            ],
+        : Container(
+            child: Row(
+              children: <Widget>[
+                Text(
+                  showDate == null
+                      ? 'Nenhuma data selecionada!'
+                      : '${DateFormat('yMMMMEEEEd').format(showDate)}',
+                  style: TextStyle(
+                    fontFamily: 'Kreon',
+                    color: color,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.date_range),
+                  color: color,
+                  iconSize: 50,
+                  onPressed: () => _showDatePicker(context),
+                ),
+              ],
+            ),
           );
   }
 }
