@@ -45,7 +45,7 @@ class TransactionList extends StatelessWidget {
                   elevation: 5,
                   color: Colors.purpleAccent[50],
                   shadowColor: Colors.purpleAccent[100],
-                  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
 
                   //
                   child: ListTile(
@@ -65,7 +65,7 @@ class TransactionList extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     subtitle: Text(
-                      DateFormat('d MMM y').format(tr.date),
+                      DateFormat('yMMMMEEEEd').format(tr.date),
                       style: TextStyle(fontSize: 12),
                     ),
                     // Responsavel por excluir as transações, get ID

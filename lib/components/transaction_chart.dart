@@ -36,7 +36,7 @@ class TransactionChart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   // vai retornar um Future, pegando o valor do elemento anterior
