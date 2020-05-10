@@ -97,8 +97,8 @@ class _TransactionFormState extends State<TransactionForm> {
             FittedBox(
               child: Card(
                 elevation: 10,
-                shadowColor: Colors.purpleAccent[100],
                 color: Colors.purpleAccent[50],
+                shadowColor: Colors.purpleAccent[100],
 
                 //
                 child: Padding(

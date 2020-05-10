@@ -43,10 +43,11 @@ class TransactionList extends StatelessWidget {
 
                 return Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 10,
-                  ),
+                  color: Colors.purpleAccent[50],
+                  shadowColor: Colors.purpleAccent[100],
+                  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+
+                  //
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,
