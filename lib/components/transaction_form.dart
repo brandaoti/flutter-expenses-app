@@ -36,90 +36,105 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   // Função ativar a data
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
-    ).then((datePicker) {
-      setState(() {
-        _showDate = datePicker;
-      });
-    });
-  }
+  // _showDatePicker() {
+  //   showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2019),
+  //     lastDate: DateTime.now(),
+  //   ).then((datePicker) {
+  //     setState(() {
+  //       _showDate = datePicker;
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     // implement build TextFormField
     return Card(
       elevation: 5,
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 8),
-          // Titulo
-          TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              labelText: 'Título',
-            ),
-            //
-            controller: titleController,
-            onFieldSubmitted: (_) => _submitForm(),
-          ),
+      shadowColor: Colors.purpleAccent[100],
+      margin: EdgeInsets.all(10),
 
-          SizedBox(height: 8),
-          // Valor
-          TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
+      //
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 8),
+            // Titulo
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                labelText: 'Título',
               ),
-              labelText: 'Valor',
+              //
+              controller: titleController,
+              onFieldSubmitted: (_) => _submitForm(),
             ),
-            //
-            controller: valueController,
-            keyboardType: TextInputType.number,
-            onFieldSubmitted: (_) => _submitForm(),
-          ),
 
-          // Container pra alinhar o ROW
-          Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 5,
+            SizedBox(height: 8),
+            // Valor
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                labelText: 'Valor',
+              ),
+              //
+              controller: valueController,
+              keyboardType: TextInputType.number,
+              onFieldSubmitted: (_) => _submitForm(),
             ),
-            // Linha pra controlar a mensagem de exibir a data
-            child: Card(
-              elevation: 5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Text(
-                    'Data:',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
 
-                  // Instanciar AdaptativeDatePicker
-                  AdaptativeDatePicker(
-                    showDate: _showDate,
-                    onDateChanged: (newDate) {
-                      setState(() {
-                        _showDate = newDate;
-                      });
-                    },
+            SizedBox(height: 8),
+
+            // FittedBox, vai adaptando o tamanho da linha
+            FittedBox(
+              child: Card(
+                elevation: 10,
+                shadowColor: Colors.purpleAccent[100],
+                color: Colors.purpleAccent[50],
+
+                //
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 5,
                   ),
-                  // Instanciando AdaptativeButton
-                  AdaptativeButton(
-                    onPressed: _submitForm,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(
+                        'Data: ',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+
+                      // Instanciar AdaptativeDatePicker
+                      AdaptativeDatePicker(
+                        showDate: _showDate,
+                        onDateChanged: (newDate) {
+                          setState(() {
+                            _showDate = newDate;
+                          });
+                        },
+                      ),
+
+                      // Instanciando AdaptativeButton
+                      AdaptativeButton(
+                        onPressed: _submitForm,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
