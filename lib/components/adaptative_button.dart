@@ -24,7 +24,7 @@ class AdaptativeButton extends StatelessWidget {
         // Add Transações
         IconButton(
             icon: Icon(Icons.add_circle),
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).accentColor,
             tooltip: 'Adicionar nova transação?',
             iconSize: 60,
             onPressed: onPressed,

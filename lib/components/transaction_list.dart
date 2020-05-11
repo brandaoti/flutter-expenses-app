@@ -50,6 +50,7 @@ class TransactionList extends StatelessWidget {
                   //
                   child: ListTile(
                     leading: CircleAvatar(
+                      //backgroundColor: Theme.of(context).accentColor,
                       radius: 30,
                       child: Padding(
                         padding: const EdgeInsets.all(5),

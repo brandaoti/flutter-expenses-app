@@ -9,7 +9,9 @@ class TransactionMaterial extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        //primaryColor: Colors.deepOrange,
+        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.orangeAccent[700],
         fontFamily: 'Kreon',
         textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(

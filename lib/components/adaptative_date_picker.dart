@@ -35,7 +35,7 @@ class AdaptativeDatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Color
-    final Color color = Colors.deepOrange;
+    final Color color = Theme.of(context).accentColor;
 
     // implement build DatePicker for IOS And ANDROID
     return Platform.isIOS
@@ -58,7 +58,7 @@ class AdaptativeDatePicker extends StatelessWidget {
                       : '${DateFormat('yMMMMEEEEd').format(showDate)}',
                   style: TextStyle(
                     //fontFamily: 'CormorantGaramond',
-                    color: color,
+                    color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
