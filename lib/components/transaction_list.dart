@@ -16,69 +16,82 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Build - lista de Transações
-    return Container(
-      height: 400,
-      child: transaction.isEmpty
-          ? Column(
-              children: <Widget>[
-                SizedBox(height: 50),
-                Text(
-                  'Nenhuma Transação Cadastrada!',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(height: 50),
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    color: Colors.purple,
-                  ),
-                ),
-              ],
-            )
-          : ListView.builder(
-              itemCount: transaction.length,
-              itemBuilder: (context, index) {
-                final tr = transaction[index];
-
-                return Card(
-                  elevation: 5,
-                  color: Colors.purpleAccent[50],
-                  shadowColor: Colors.purpleAccent[100],
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-
-                  //
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      //backgroundColor: Theme.of(context).accentColor,
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: FittedBox(
-                          child: Text(
-                            "R\$ ${tr.value.toStringAsFixed(2)}",
-                          ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          //color: Colors.green,
+          height: 400,
+          child: transaction.isEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    SizedBox(height: constraints.maxHeight * 0.05),
+                    Container(
+                      height: constraints.maxHeight * 0.05,
+                      child: Center(
+                        child: Text(
+                          'Nenhuma Transação Cadastrada!',
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                       ),
                     ),
-                    title: Text(
-                      tr.title,
-                      style: Theme.of(context).textTheme.headline6,
+                    Container(
+                      height:
+                          constraints.maxHeight - (constraints.maxHeight * 0.1),
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        color: Theme.of(context).accentColor,
+                        //scale: 2,
+                      ),
                     ),
-                    subtitle: Text(
-                      DateFormat('yMMMMEEEEd').format(tr.date),
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    // Responsavel por excluir as transações, get ID
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete_outline),
-                      color: Colors.red,
-                      onPressed: () => onRemove(tr.id),
-                    ),
-                  ),
-                );
-              },
-            ),
+                  ],
+                )
+              : ListView.builder(
+                  itemCount: transaction.length,
+                  itemBuilder: (context, index) {
+                    final tr = transaction[index];
+
+                    return Card(
+                      elevation: 5,
+                      color: Colors.purpleAccent[50],
+                      shadowColor: Colors.purpleAccent[100],
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+
+                      //
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          //backgroundColor: Theme.of(context).accentColor,
+                          radius: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: FittedBox(
+                              child: Text(
+                                "R\$ ${tr.value.toStringAsFixed(2)}",
+                              ),
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          tr.title,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        subtitle: Text(
+                          DateFormat('yMMMMEEEEd').format(tr.date),
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        // Responsavel por excluir as transações, get ID
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete_outline),
+                          color: Colors.red,
+                          onPressed: () => onRemove(tr.id),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+        );
+      },
     );
   }
 }
