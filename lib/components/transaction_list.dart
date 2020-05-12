@@ -29,9 +29,14 @@ class TransactionList extends StatelessWidget {
                     Container(
                       height: constraints.maxHeight * 0.05,
                       child: Center(
-                        child: Text(
-                          'Nenhuma Transação Cadastrada!',
-                          style: Theme.of(context).textTheme.headline6,
+                        child: FittedBox(
+                          child: Text(
+                            'Nenhuma despesa registrada!',
+                            style: Theme.of(context)
+                                .appBarTheme
+                                .textTheme
+                                .headline6,
+                          ),
                         ),
                       ),
                     ),
@@ -82,8 +87,8 @@ class TransactionList extends StatelessWidget {
                         ),
                         // Responsavel por excluir as transações, get ID
                         trailing: IconButton(
-                          icon: Icon(Icons.delete_outline),
-                          color: Colors.red,
+                          icon: Icon(Icons.delete_forever),
+                          color: Colors.red[600],
                           onPressed: () => onRemove(tr.id),
                         ),
                       ),
