@@ -21,18 +21,29 @@ class AdaptativeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS
-        ? Container()
-        : TextFormField(
-            decoration: InputDecoration(
-              labelText: label,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
+    // implements build TextForm for ANDROID and IOS
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 5,
+      ),
+      child: Platform.isIOS
+          ? CupertinoTextField(
+              controller: controller,
+              keyboardType: keyboardType,
+              placeholder: label,
+              onSubmitted: (_) => onFieldSubmitted(),
+            )
+          : TextFormField(
+              decoration: InputDecoration(
+                labelText: label,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
               ),
+              controller: controller,
+              keyboardType: keyboardType,
+              onFieldSubmitted: (_) => onFieldSubmitted(),
             ),
-            controller: controller,
-            keyboardType: keyboardType,
-            onFieldSubmitted: (_) => onFieldSubmitted(),
-          );
+    );
   }
 }
