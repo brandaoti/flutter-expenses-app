@@ -16,63 +16,8 @@ class ExpensesApp extends StatefulWidget {
 }
 
 class _ExpensesAppState extends State<ExpensesApp> {
-  // List TODO: Remover
-  final List<Transaction> _transaction = [
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: Random().nextDouble().toString(),
-      title: 'Conta de luz',
-      value: 68.91,
-      date: DateTime.now(),
-    ),
-  ];
+  // List
+  final List<Transaction> _transaction = [];
 
   bool _showChart = true;
 
@@ -94,10 +39,16 @@ class _ExpensesAppState extends State<ExpensesApp> {
   }
 
   _showModalForm(BuildContext context) {
+    final height = MediaQuery.of(context).size.height * 0.7;
+
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (_) {
-        return TransactionForm(_addTransaction);
+        return Container(
+          height: height,
+          child: TransactionForm(_addTransaction),
+        );
       },
     );
   }
