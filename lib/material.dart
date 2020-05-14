@@ -9,15 +9,17 @@ class TransactionMaterial extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        //primaryColor: Colors.deepOrange,
+        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.orangeAccent[700],
         fontFamily: 'Kreon',
         textTheme: ThemeData.light().textTheme.copyWith(
-              title: TextStyle(
+              headline6: TextStyle(
                 fontFamily: 'Kreon',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
-              subtitle: TextStyle(
+              subtitle2: TextStyle(
                 fontFamily: 'CormorantGaramond',
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -25,7 +27,7 @@ class TransactionMaterial extends StatelessWidget {
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
+                headline6: TextStyle(
                   fontFamily: 'Kreon',
                   fontSize: 24,
                   fontWeight: FontWeight.w300,

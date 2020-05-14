@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+// import 'package:intl/intl.dart';
+
+import 'adaptative_button.dart';
+import 'adaptative_date_picker.dart';
+import 'adaptative_form.dart';
 
 class TransactionForm extends StatefulWidget {
   // Controladores
@@ -33,111 +38,97 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   // Função ativar a data
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
-    ).then((datePicker) {
-      setState(() {
-        _showDate = datePicker;
-      });
-    });
-  }
+  // _showDatePicker() {
+  //   showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2019),
+  //     lastDate: DateTime.now(),
+  //   ).then((datePicker) {
+  //     setState(() {
+  //       _showDate = datePicker;
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // keyboards
+    final keyboardText = TextInputType.text;
+    final keyboardNumber = TextInputType.number;
+
     // implement build TextFormField
     return Card(
       elevation: 5,
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 8),
-          // Titulo
-          TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              labelText: 'Título',
-            ),
-            //
-            controller: titleController,
-            onFieldSubmitted: (_) => _submitForm(),
-          ),
+      shadowColor: Colors.purpleAccent[100],
+      margin: EdgeInsets.all(10),
 
-          SizedBox(height: 8),
-          // Valor
-          TextFormField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              labelText: 'Valor',
+      //
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          children: <Widget>[
+            // Titulo
+            SizedBox(height: 8),
+            AdaptativeForm(
+              label: 'Título',
+              controller: titleController,
+              keyboardType: keyboardText,
+              onFieldSubmitted: _submitForm,
             ),
-            //
-            controller: valueController,
-            keyboardType: TextInputType.number,
-            onFieldSubmitted: (_) => _submitForm(),
-          ),
 
-          // Container pra alinhar o ROW
-          Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 5,
+            // Valor
+            SizedBox(height: 8),
+            AdaptativeForm(
+              label: 'Valor',
+              controller: valueController,
+              keyboardType: keyboardNumber,
+              onFieldSubmitted: null,
             ),
-            // Linha pra controlar a mensagem de exibir a data
-            child: Card(
-              elevation: 5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Text(
-                    'Data:',
-                    style: Theme.of(context).textTheme.title,
+
+            // FittedBox, vai adaptando o tamanho da linha
+            SizedBox(height: 8),
+            FittedBox(
+              child: Card(
+                elevation: 10,
+                color: Colors.purpleAccent[50],
+                shadowColor: Colors.purpleAccent[100],
+
+                //
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 5,
                   ),
-                  // TODO: verificar como melhorar esse TestStyle
-                  Text(
-                    _showDate == null
-                        ? 'Nenhuma data selecionada!'
-                        : '${DateFormat(' dd MMM y').format(_showDate)}',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontFamily: 'Kreon',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  // Linha pra organizar os botões.
-                  Row(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      //Selecionar data
-                      IconButton(
-                        icon: Icon(
-                          Icons.date_range,
-                        ),
-                        color: Colors.red,
-                        iconSize: 50,
-                        tooltip: 'Adicionar nova data?',
-                        onPressed: _showDatePicker,
+                      Text(
+                        'Data: ',
+                        style: Theme.of(context).textTheme.headline6,
                       ),
 
-                      // Add transações
-                      IconButton(
-                        icon: Icon(Icons.add_circle_outline),
-                        color: Theme.of(context).primaryColor,
-                        iconSize: 50,
-                        tooltip: 'Adicionar nova transação?',
+                      // Instanciar AdaptativeDatePicker
+                      AdaptativeDatePicker(
+                        showDate: _showDate,
+                        onDateChanged: (newDate) {
+                          setState(() {
+                            _showDate = newDate;
+                          });
+                        },
+                      ),
+
+                      // Instanciando AdaptativeButton
+                      AdaptativeButton(
                         onPressed: _submitForm,
                       ),
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

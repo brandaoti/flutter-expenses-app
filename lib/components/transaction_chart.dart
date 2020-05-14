@@ -36,7 +36,7 @@ class TransactionChart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   // vai retornar um Future, pegando o valor do elemento anterior
@@ -51,25 +51,28 @@ class TransactionChart extends StatelessWidget {
     // implements build Transaction chart
     return Card(
       elevation: 15,
-      margin: EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 10,
-      ),
-      child: Row(
-        children: groupTransaction.map((tr) {
-          return Flexible(
-            fit: FlexFit.tight,
-            child: ChartBar(
-              label: tr['day'],
-              value: tr['value'],
-              percentage: _weekTotalvalue == 0
-                  ? 0
-                  : (tr['value'] as double) / _weekTotalvalue,
-            ),
-          );
-        }).toList(),
-      ),
       color: Colors.purple[50],
+      shadowColor: Colors.purpleAccent[100],
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+
+      //
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: groupTransaction.map((tr) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                label: tr['day'],
+                value: tr['value'],
+                percentage: _weekTotalvalue == 0
+                    ? 0
+                    : (tr['value'] as double) / _weekTotalvalue,
+              ),
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }
