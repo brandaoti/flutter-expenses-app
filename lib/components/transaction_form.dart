@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+// import 'package:intl/intl.dart';
 
 import 'adaptative_button.dart';
 import 'adaptative_date_picker.dart';
+import 'adaptative_form.dart';
 
 class TransactionForm extends StatefulWidget {
   // Controladores
@@ -51,6 +53,10 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+    // keyboards
+    final keyboardText = TextInputType.text;
+    final keyboardNumber = TextInputType.number;
+
     // implement build TextFormField
     return Card(
       elevation: 5,
@@ -62,38 +68,26 @@ class _TransactionFormState extends State<TransactionForm> {
         padding: const EdgeInsets.all(5),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 8),
             // Titulo
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                labelText: 'Título',
-              ),
-              //
+            SizedBox(height: 8),
+            AdaptativeForm(
+              label: 'Título',
               controller: titleController,
-              onFieldSubmitted: (_) => _submitForm(),
+              keyboardType: keyboardText,
+              onFieldSubmitted: _submitForm,
             ),
 
-            SizedBox(height: 8),
             // Valor
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                labelText: 'Valor',
-              ),
-              //
-              controller: valueController,
-              keyboardType: TextInputType.number,
-              onFieldSubmitted: (_) => _submitForm(),
-            ),
-
             SizedBox(height: 8),
+            AdaptativeForm(
+              label: 'Valor',
+              controller: valueController,
+              keyboardType: keyboardNumber,
+              onFieldSubmitted: null,
+            ),
 
             // FittedBox, vai adaptando o tamanho da linha
+            SizedBox(height: 8),
             FittedBox(
               child: Card(
                 elevation: 10,
