@@ -83,7 +83,7 @@ class _TransactionFormState extends State<TransactionForm> {
               label: 'Valor',
               controller: valueController,
               keyboardType: keyboardNumber,
-              onFieldSubmitted: null,
+              onFieldSubmitted: _submitForm,
             ),
 
             // FittedBox, vai adaptando o tamanho da linha
